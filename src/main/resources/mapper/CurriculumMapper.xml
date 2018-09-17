@@ -442,4 +442,41 @@
       main_teacher = #{mainTeacher,jdbcType=VARCHAR}
     where curriculum_id = #{curriculumId,jdbcType=INTEGER}
   </update>
+  
+  
+  <!-- 当前学习人数统计 -->
+   <select id="getCurrentStudyNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      SELECT count(*) from tbl_curriculum tc
+        join tbl_tution tt on tc.curriculum_id = tt.curriculum_id
+        join tbl_add_curriculum tac on tt.tution_id = tac.tution_id  WHERE tc.curriculum_id=#{id}
+  </select>
+
+
+
+
+  <!-- 课程评价记录数 -->
+  <select id="getCurriculumEvaluation" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+     select count(*) from tbl_comment a
+       JOIN tbl_curriculum b on a.curriculum_id=b.curriculum_id WHERE a.curriculum_id=#{id}
+  </select>
+  
+  
+  <!-- 2.课程名称，学校名称，教师名，课程介绍、课程寄语、预备知识、。。。
+     评分标准，已参与人数（开课表中该课程ID对应的参与人数之和）等。 -->
+  <select id="getCouresDetails" parameterType="java.lang.Integer" resultType="com.hniu.entity.CouresDetails">
+    SELECT a.`name`,a.introduce,a.message,a.propaedeutics,a.scoring,a.main_teacher,
+       b.school_name,c.population
+		 FROM tbl_curriculum AS a
+		 INNER JOIN tbl_university as b ON a.university_id=b.university_id
+		 INNER JOIN tbl_tution AS c ON a.curriculum_id=c.curriculum_id where a.curriculum_id=#{id}
+	   order by a.curriculum_id
+  </select>
+  
+ <select id="JoinTheCourseByid" parameterType="java.lang.Integer" resultType="com.hniu.entity.CouresDetails">
+    select a.curriculum_id,a.tution_id,c.user_id,b.score,b.require from tbl_tution a
+	  JOIN tbl_user  c 
+	  JOIN tbl_curriculum b ON a.curriculum_id=b.curriculum_id
+	  JOIN tbl_add_curriculum  d ON d.user_id=c.user_id WHERE a.curriculum_id=#{id}
+  </select> 
+  
 </mapper>
