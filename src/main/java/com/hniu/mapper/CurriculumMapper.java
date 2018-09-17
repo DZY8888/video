@@ -1,5 +1,6 @@
 package com.hniu.mapper;
 
+import com.hniu.entity.CouresDetails;
 import com.hniu.entity.Curriculum;
 import com.hniu.entity.CurriculumExample;
 import com.hniu.entity.CurriculumWithBLOBs;
@@ -34,4 +35,19 @@ public interface CurriculumMapper {
     int updateByPrimaryKeyWithBLOBs(CurriculumWithBLOBs record);
 
     int updateByPrimaryKey(Curriculum record);
+    
+    Integer getcurriculumMapperStudyNum();
+
+    /*拿到当期学习人数统计*/
+	Integer getCurrentStudyNum(@Param("id") Integer id);
+
+	/*拿到课程评价记录条数*/
+	Integer getCurriculumEvaluation(@Param("id") Integer id);
+	
+	/*2.课程名称，学校名称，教师名，课程介绍、课程寄语、预备知识、。。。
+          评分标准，已参与人数（开课表中该课程ID对应的参与人数之和）等。*/
+	Object getCouresDetails(@Param("id") Integer id);
+	
+	/*单击立即加入，用户可以学习课程*/
+	CouresDetails JoinTheCourseByid(@Param("id") Integer id);
 }

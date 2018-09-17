@@ -27,4 +27,6 @@ public interface CourseTypeMapper {
     int updateByPrimaryKeySelective(CourseType record);
 
     int updateByPrimaryKey(CourseType record);
+
+	Object getSchool(Integer id);
 }

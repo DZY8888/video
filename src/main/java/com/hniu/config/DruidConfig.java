@@ -19,12 +19,12 @@ public class DruidConfig {
 
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
-    public DataSource druid() {
+    public DataSource druid(){
         return new DruidDataSource();
     }
 
     //配置Druid的监控
-//1、配置一个管理后台的Servlet
+    //1、配置一个管理后台的Servlet
     @Bean
     public ServletRegistrationBean statViewServlet() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(),

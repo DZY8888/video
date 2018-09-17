@@ -15,7 +15,7 @@ public class Curriculum {
 
     private String meferences;
 
-    private String require;
+    private boolean require;
 
     private String picture;
 
@@ -85,12 +85,12 @@ public class Curriculum {
         this.meferences = meferences == null ? null : meferences.trim();
     }
 
-    public String getRequire() {
+    public boolean getRequire() {
         return require;
     }
 
-    public void setRequire(String require) {
-        this.require = require == null ? null : require.trim();
+    public void setRequire(boolean require) {
+        this.require = require;
     }
 
     public String getPicture() {

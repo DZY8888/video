@@ -27,4 +27,8 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+	Object getCommentInformation(@Param("id") Integer id);
+
+	Object getEvaluateNum(Integer id);
 }
