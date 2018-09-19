@@ -4,16 +4,17 @@ import org.springframework.stereotype.Repository;
 
 import com.hniu.entity.CourseType;
 import com.hniu.entity.University;
+import com.hniu.util.State;
 
 @Repository
 public interface SchoolService {
 
-	Object insertSchool(University university);
+	State<Object> insertSchool(University university);
 
-	Object getSchool(Integer id);
+	State<Object> getSchool(Integer id);
 
-	Object updateSchool(University university);
+	State<Object> updateSchool(University university);
 
-	Object deleteSchool(Integer id);
+	State<Object> deleteSchool(Integer id);
 	
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hniu.mapper.CommentMapper" >
+<mapper namespace="com.hniu.mapper.CommentMapper">
   <resultMap id="BaseResultMap" type="com.hniu.entity.Comment" >
     <id column="comment_id" property="commentId" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
@@ -183,6 +183,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  
   <update id="updateByExample" parameterType="map" >
     update tbl_comment
     set comment_id = #{record.commentId,jdbcType=INTEGER},
@@ -195,6 +196,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.hniu.entity.Comment" >
     update tbl_comment
     <set >
@@ -216,6 +218,7 @@
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.hniu.entity.Comment" >
     update tbl_comment
     set content = #{content,jdbcType=VARCHAR},
@@ -225,4 +228,19 @@
       asterisk_num = #{asteriskNum,jdbcType=INTEGER}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 列出课程名称，评价内容，评价时间，及评价标星 -->
+  <select id="getCommentInformation" parameterType="java.lang.Integer" resultType="com.hniu.entity.Comment_Extends">
+     SELECT  a.content,a.ctime,a.asterisk_num,
+        b.`name`
+		FROM tbl_comment AS a
+		inner JOIN tbl_curriculum AS b ON a.curriculum_id=b.curriculum_id WHERE comment_id=#{id}
+	    order by a.comment_id
+  </select>
+  
+  <!--2.显示课程总的评价数和课程得分-->
+  <select id="getEvaluateNum" parameterType="java.lang.Integer" resultType="com.hniu.entity.Curriclum_Extends">
+        SELECT COUNT(b.curriculum_id)  commentNum,a.score 
+        FROM tbl_curriculum a LEFT JOIN tbl_comment b ON a.curriculum_id = b.curriculum_id WHERE a.curriculum_id=#{id} 
+  </select>
 </mapper>

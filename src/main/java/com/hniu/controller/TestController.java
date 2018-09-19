@@ -1,12 +1,8 @@
 package com.hniu.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.hniu.entity.User;
 import com.hniu.service.UserService;
 
 @RestController
@@ -21,11 +17,11 @@ public class TestController {
 	        return "hello";
 	    }
        
-	    @RequestMapping("getUserId")
+	/*    @RequestMapping("getUserId")
 	    public List<User> getUser(Integer id){
 
 	        return  userService.getUser(id);
-	    }
+	    }*/
 	
 
 }
