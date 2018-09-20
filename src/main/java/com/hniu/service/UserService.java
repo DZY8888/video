@@ -21,7 +21,8 @@ public interface UserService {
 
 	State<Object> deleteUser(Integer id);
 
-	State<Object> getUserAll();
+	State<Object> getUserAll(Integer page, Integer rows);
+
 	
 	
 }

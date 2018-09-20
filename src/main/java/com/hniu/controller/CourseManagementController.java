@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import com.hniu.constant.StateCode;
 import com.hniu.entity.CourseType;
@@ -56,6 +57,15 @@ public class CourseManagementController {
 			return base.packaging(StateCode.FAIL, "参数不能为空",id);
 		}
 		return curriculumStatisticsService.deletecurriculum(id);
+	}
+	
+	
+	@GetMapping("/getCurriculumAll")
+	public State<Object> getCurriculumAll(Integer page, Integer rows){
+		if (page == null || rows == null) {
+			return base.packaging(StateCode.FAIL, "参数不能为空",page+rows);
+		}
+	    return curriculumStatisticsService.getCurriculumAll(page,rows);
 	}
 	
 	

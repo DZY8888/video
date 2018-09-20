@@ -29,7 +29,7 @@ public class CurriculumController extends Base{
         if(list.size()!=0){
             Page page = new Page<>();
             page.setList(list);
-            return packaging(StateCode.SUCCESS,"课程信息查询成功",page);
+            return packaging(StateCode.selectByExample,"课程信息查询成功",page);
         }else{
             return packaging(StateCode.FAIL,"课程信息查询失败",null);
         }
@@ -43,7 +43,7 @@ public class CurriculumController extends Base{
         if(StringUtils.isEmpty(curriculum)){
             return packaging(StateCode.FAIL,"课程信息查询失败",null);
         }else {
-            return packaging(StateCode.SUCCESS,"课程信息查询成功",curriculum);
+            return packaging(StateCode.selectByExample,"课程信息查询成功",curriculum);
         }
     }
 
@@ -52,7 +52,7 @@ public class CurriculumController extends Base{
     public State<Object> inputCurriculum(CurriculumWithBLOBs curriculum){
         int i = curriculumService.inputCurriculum(curriculum);
         if(i != 0){
-            return packaging(StateCode.SUCCESS,"课程添加成功",null);
+            return packaging(StateCode.selectByExample,"课程添加成功",null);
         }else{
             return packaging(StateCode.FAIL,"课程添加失败",null);
         }
@@ -64,7 +64,7 @@ public class CurriculumController extends Base{
     public State<Object> updateCurriculum(@PathVariable("curriculum_id") int curriculum_id,CurriculumWithBLOBs curriculum){
         int i = curriculumService.updateCurriculum(curriculum_id,curriculum);
         if(i != 0){
-            return packaging(StateCode.SUCCESS,"课程修改成功",null);
+            return packaging(StateCode.selectByExample,"课程修改成功",null);
         }else{
             return packaging(StateCode.FAIL,"课程修改失败",null);
         }
@@ -75,7 +75,7 @@ public class CurriculumController extends Base{
     public State<Object> DeleteCurriculum(@PathVariable("curriculum_id") int curriculum_id){
         int i = curriculumService.deleteCurriculum(curriculum_id);
         if(i != 0){
-            return packaging(StateCode.SUCCESS,"课程删除成功",null);
+            return packaging(StateCode.selectByExample,"课程删除成功",null);
         }else{
             return packaging(StateCode.FAIL,"课程删除失败",null);
         }

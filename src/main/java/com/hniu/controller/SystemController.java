@@ -22,7 +22,7 @@ public class SystemController extends Base{
         if(StringUtils.isEmpty(system)){
             return packaging(StateCode.FAIL,"查询系统信息失败",null);
         }else{
-            return packaging(StateCode.SUCCESS,"查询成功",system);
+            return packaging(StateCode.selectByExample,"查询成功",system);
         }
     }
 
@@ -31,7 +31,7 @@ public class SystemController extends Base{
     public State<Object> updateSystem(@PathVariable("sustem_id") int system_id,System system){
         int i = systemService.updateSystem(system_id,system);
         if(i != 0){
-            return packaging(StateCode.SUCCESS,"修改系统数据成功",null);
+            return packaging(StateCode.selectByExample,"修改系统数据成功",null);
         }else{
             return packaging(StateCode.FAIL,"修改系统数据失败",null);
         }

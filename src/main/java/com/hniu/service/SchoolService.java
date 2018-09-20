@@ -16,5 +16,7 @@ public interface SchoolService {
 	State<Object> updateSchool(University university);
 
 	State<Object> deleteSchool(Integer id);
+
+	State<Object> getSchoolAll(Integer page, Integer rows);
 	
 }

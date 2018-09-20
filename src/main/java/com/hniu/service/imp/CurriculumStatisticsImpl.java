@@ -1,18 +1,21 @@
 package com.hniu.service.imp;
 
 import static org.hamcrest.CoreMatchers.nullValue;
-
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.RequestToViewNameTranslator;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hniu.constant.StateCode;
 import com.hniu.controller.Base;
 import com.hniu.entity.AddCurriculum;
 import com.hniu.entity.Comment;
 import com.hniu.entity.CouresDetails;
 import com.hniu.entity.CourseType;
+import com.hniu.entity.CourseTypeExample;
 import com.hniu.entity.Tution;
 import com.hniu.entity.Video;
 import com.hniu.mapper.AddCurriculumMapper;
@@ -29,7 +32,7 @@ import com.hniu.util.ChangliangUtil;
 import com.hniu.util.State;
 
 @Service
-public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
+public  class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 
 	@Autowired
 	private CurriculumMapper curriculumMapper;
@@ -60,7 +63,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getCurriculumStudyNum(Integer id) {
 		Tution selectByPrimaryKey = tutionMapper.selectByPrimaryKey(id);
 		if (selectByPrimaryKey != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, selectByPrimaryKey);
 		}
@@ -70,7 +73,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getCurrentStudyNum(Integer id) {
 		Integer currentStudyNum = curriculumMapper.getCurrentStudyNum(id);
 		if (currentStudyNum != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, currentStudyNum);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, currentStudyNum);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, currentStudyNum);
 		}
@@ -80,7 +83,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object>  getCurriculumEvaluation(Integer id) {
 		Integer curriculumEvaluation = curriculumMapper.getCurriculumEvaluation(id);
 		if (curriculumEvaluation != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, curriculumEvaluation);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, curriculumEvaluation);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, curriculumEvaluation);
 		}
@@ -90,7 +93,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> insertcurriculum(CourseType courseType) {
 		int insert = courseTypeMapper.insert(courseType);
 		if (insert == 1) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.INSERTSUCCESS, insert);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.INSERTSUCCESS, insert);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.INSERTFAIL, insert);
 		}
@@ -100,7 +103,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getcurriculum(Integer id) {
 		CourseType selectByPrimaryKey = courseTypeMapper.selectByPrimaryKey(id);
 		if (selectByPrimaryKey != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, selectByPrimaryKey);
 		}
@@ -110,7 +113,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> updatecurriculum(CourseType courseType) {
 		int updateByPrimaryKey = courseTypeMapper.updateByPrimaryKey(courseType);
 		if (updateByPrimaryKey == 1) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.UPDATESUCCESS, updateByPrimaryKey);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.UPDATESUCCESS, updateByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.UPDATEFAIL, updateByPrimaryKey);
 		}
@@ -120,7 +123,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> deletecurriculum(Integer id) {
 		int deleteByPrimaryKey = courseTypeMapper.deleteByPrimaryKey(id);
 		if (deleteByPrimaryKey == 1) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.DELETESUCCESS, deleteByPrimaryKey);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.DELETESUCCESS, deleteByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.DELETEFAIL, deleteByPrimaryKey);
 		}
@@ -138,7 +141,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getCouresDetails(Integer id) {
 		CouresDetails couresDetails = curriculumMapper.getCouresDetails(id);
 		if (couresDetails != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, couresDetails);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, couresDetails);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, couresDetails);
 		}
@@ -150,7 +153,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getCommentInformation(Integer id) {
 		State<Object> commentInformation = CommentMapper.getCommentInformation(id);
 		if (commentInformation != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, commentInformation);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, commentInformation);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, commentInformation);
 		}
@@ -162,7 +165,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getEvaluateNum(Integer id) {
 		State<Object> evaluateNum = CommentMapper.getEvaluateNum(id);
 		if (evaluateNum != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, evaluateNum);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, evaluateNum);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL , evaluateNum);
 		}
@@ -173,7 +176,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> getVideo(Integer id) {
 		Video selectByPrimaryKey = videoMapper.selectByPrimaryKey(id);
 		if (selectByPrimaryKey != null) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL , selectByPrimaryKey);
 		}
@@ -185,7 +188,7 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 	public State<Object> insertComment(Comment comment) {
 		int insert = commentMapper.insert(comment);
 		if (insert == 1) {
-			return base.packaging(StateCode.SUCCESS,ChangliangUtil.INSERTSUCCESS, insert);
+			return base.packaging(StateCode.selectByExample,ChangliangUtil.INSERTSUCCESS, insert);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.INSERTFAIL , insert);
 		}
@@ -205,9 +208,29 @@ public class CurriculumStatisticsImpl implements CurriculumStatisticsService {
 		addCurriculum.setIsQualified(couresDetails.getRequire());
 		int i=addCurriculumMapper.insert(addCurriculum);
 		if (i == 1) {
-			return base.packaging(StateCode.SUCCESS,"加入课程成功", i);
+			return base.packaging(StateCode.selectByExample,"加入课程成功", i);
 		}else {
 			return base.packaging(StateCode.FAIL, "加入课程失败" , i);
+		}
+	}
+	
+	
+	/*
+	 * (non-Javadoc) 将课程类别分页
+	 * @see com.hniu.service.CurriculumStatisticsService#getCurriculumAll(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public State<Object> getCurriculumAll(Integer page, Integer rows){
+		PageHelper.startPage(page,rows);
+		List<Object> list=new ArrayList<>();
+		CourseTypeExample example=new CourseTypeExample();	
+		List<CourseType> listExample = courseTypeMapper.selectByExample(example);
+		if (listExample != null && listExample.size() > 0) {
+			PageInfo info=new PageInfo<>(listExample);
+			list.add(info.getTotal());
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.QUERYSUCCESS, list);
+		}else { 
+			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, list);
 		}
 	}
 

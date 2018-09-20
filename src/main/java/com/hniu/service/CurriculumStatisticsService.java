@@ -50,5 +50,9 @@ public interface CurriculumStatisticsService {
 
 	/*单击立即加入，用户可以学习课程*/
 	State<Object> JoinTheCourseByid(Integer id);
+
+	/*分页*/
+	State<Object> getCurriculumAll(Integer page, Integer rows);
+
 	
 } 

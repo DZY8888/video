@@ -1,12 +1,18 @@
 package com.hniu.service.imp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hniu.constant.StateCode;
 import com.hniu.controller.Base;
 import com.hniu.entity.CourseType;
 import com.hniu.entity.University;
+import com.hniu.entity.UniversityExample;
 import com.hniu.mapper.CourseTypeMapper;
 import com.hniu.mapper.UniversityMapper;
 import com.hniu.service.SchoolService;
@@ -31,7 +37,7 @@ public class SchoolServiceImpl implements SchoolService{
 	public State<Object> insertSchool(University university) {
 		int insert = universityMapper.insert(university);
 		if (insert == 1) {
-			return base.packaging(StateCode.SUCCESS, ChangliangUtil.INSERTSUCCESS, insert);
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.INSERTSUCCESS, insert);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.INSERTFAIL, insert);
 		}
@@ -41,7 +47,7 @@ public class SchoolServiceImpl implements SchoolService{
 	public State<Object> getSchool(Integer id) {
 		University selectByPrimaryKey = universityMapper.selectByPrimaryKey(id);
 		if (selectByPrimaryKey != null) {
-			return base.packaging(StateCode.SUCCESS, ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.QUERYSUCCESS, selectByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, selectByPrimaryKey);
 		}
@@ -52,7 +58,7 @@ public class SchoolServiceImpl implements SchoolService{
 	public State<Object> updateSchool(University university) {
 		int updateByPrimaryKey = universityMapper.updateByPrimaryKey(university);
 		if (updateByPrimaryKey == 1) {
-			return base.packaging(StateCode.SUCCESS, ChangliangUtil.UPDATESUCCESS, updateByPrimaryKey);
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.UPDATESUCCESS, updateByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.UPDATEFAIL, updateByPrimaryKey);
 		}
@@ -62,9 +68,24 @@ public class SchoolServiceImpl implements SchoolService{
 	public  State<Object> deleteSchool(Integer id) {
 		int deleteByPrimaryKey = universityMapper.deleteByPrimaryKey(id);
 		if (deleteByPrimaryKey == 1) {
-			return base.packaging(StateCode.SUCCESS, ChangliangUtil.DELETESUCCESS, deleteByPrimaryKey);
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.DELETESUCCESS, deleteByPrimaryKey);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.DELETEFAIL, deleteByPrimaryKey);
+		}
+	}
+
+	@Override
+	public State<Object> getSchoolAll(Integer page, Integer rows) {
+		PageHelper.startPage(page, rows);
+		List<Object> list=new ArrayList<>();
+		UniversityExample UniversityExample=new UniversityExample();
+		List<University> listUniversity = universityMapper.selectByExample(UniversityExample);
+		if (listUniversity != null && listUniversity.size() > 0) {
+			PageInfo info=new PageInfo<>(listUniversity);
+			list.add(info.getTotal());
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.QUERYSUCCESS, list);
+		}else {
+		    return base.packaging(StateCode.FAIL, ChangliangUtil.DELETEFAIL, listUniversity);
 		}
 	}
 		

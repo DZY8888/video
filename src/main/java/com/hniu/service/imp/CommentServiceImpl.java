@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService{
 	public State<Object> getComment(Integer id) {
 		Comment selectByPrimaryKey = commentmapper.selectByPrimaryKey(id);
 		if (selectByPrimaryKey != null) {
-			return base.packaging(StateCode.SUCCESS, ChangliangUtil.QUERYSUCCESS, id);
+			return base.packaging(StateCode.selectByExample, ChangliangUtil.QUERYSUCCESS, id);
 		}else {
 			return base.packaging(StateCode.FAIL, ChangliangUtil.QUERYFAIL, id);
 		}

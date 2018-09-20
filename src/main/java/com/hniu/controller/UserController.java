@@ -28,9 +28,11 @@ public class UserController {
 	public StateCode StateCode;
 	
 	@GetMapping("/getUserAll")
-	public State<Object> getUserAll(){
-		
-		return userService.getUserAll();
+	public State<Object> getUserAll(Integer page,Integer rows){
+		if (page == null || rows == null) {
+			return base.packaging(StateCode.FAIL, "参数不能为空",page+rows);
+		}
+		return userService.getUserAll(page,rows);
 	}
 	
 	@PostMapping("/insertUser")
@@ -65,5 +67,7 @@ public class UserController {
     	return userService.deleteUser(id);
     }
 	
+    
+    
 	
 }

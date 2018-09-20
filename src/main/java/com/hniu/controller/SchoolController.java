@@ -55,5 +55,13 @@ public class SchoolController {
 	    }
 		return schoolService.deleteSchool(id);
 	}
+	
+	@GetMapping("/getSchoolAll")
+	public State<Object> getSchoolAll(Integer page,Integer rows){
+		if (page == null || rows == null) {
+			return  base.packaging(StateCode.FAIL, "参数不能为空",page+rows);
+		}
+		return schoolService.getSchoolAll(page,rows);
+	}
 
 }

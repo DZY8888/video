@@ -2,7 +2,7 @@ package com.hniu.constant;
 
 public enum StateCode {
 	FAIL("0"),//失败
-	SUCCESS("1"), //成功
+	selectByExample("1"), //成功
 	NOCHANGE("2");//未更改
 
 	private String state;
