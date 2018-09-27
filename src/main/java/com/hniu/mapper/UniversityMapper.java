@@ -2,6 +2,8 @@ package com.hniu.mapper;
 
 import com.hniu.entity.University;
 import com.hniu.entity.UniversityExample;
+import com.hniu.entity.User;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,6 @@ public interface UniversityMapper {
     int updateByPrimaryKeySelective(University record);
 
     int updateByPrimaryKey(University record);
+
+	List<University> getFuzzyquery(@Param("name") String name);
 }

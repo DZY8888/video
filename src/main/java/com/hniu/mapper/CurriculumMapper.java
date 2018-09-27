@@ -4,6 +4,8 @@ import com.hniu.entity.CouresDetails;
 import com.hniu.entity.Curriculum;
 import com.hniu.entity.CurriculumExample;
 import com.hniu.entity.CurriculumWithBLOBs;
+import com.hniu.entity.NavigationDetails;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,4 +55,6 @@ public interface CurriculumMapper {
 	
 	/*单击立即加入，用户可以学习课程 DZY*/
 	CouresDetails JoinTheCourseByid(@Param("id") Integer id);
+
+	NavigationDetails getNavigationDetails(@Param("id") Integer id);
 }

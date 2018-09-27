@@ -483,4 +483,15 @@
 	  JOIN tbl_add_curriculum  d ON d.user_id=c.user_id WHERE a.curriculum_id=#{id}
   </select> 
   
+  <select id="getNavigationDetails" parameterType="java.lang.Integer" resultType="com.hniu.entity.NavigationDetails">
+      SELECT b.content,d.`name`,d.title,d.intro,d.picture,d.teacher_id,e.chapter_name,e.chapter_num,e.redact_teacher,e.redact_time,f.Summary_name,f.Summary_Num
+       FROM tbl_curriculum AS a
+	    INNER JOIN tbl_comment AS b ON a.curriculum_id=b.curriculum_id
+	    INNER JOIN tbl_give AS c ON a.curriculum_id=c.curriculum_id
+	    INNER JOIN tbl_teacher AS d ON c.teacher_id=d.teacher_id
+	    inner JOIN tbl_chapter AS e ON a.curriculum_id=e.curriculum_id
+	    INNER JOIN tbl_knowledge AS f ON f.chapter_id=e.chapter_id 
+	    WHERE a.curriculum_id=#{id}
+  </select>
+  
 </mapper>

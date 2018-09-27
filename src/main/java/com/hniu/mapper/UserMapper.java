@@ -2,6 +2,8 @@ package com.hniu.mapper;
 
 import com.hniu.entity.User;
 import com.hniu.entity.UserExample;
+import com.hniu.util.State;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+	List<User> getFuzzyquery(@Param("name") String name);
 }

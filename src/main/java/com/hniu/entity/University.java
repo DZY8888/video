@@ -5,6 +5,8 @@ public class University {
 
     private String schoolName;
 
+    private String school_name;
+    
     public Integer getUniversityId() {
         return universityId;
     }
