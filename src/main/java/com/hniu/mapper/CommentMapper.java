@@ -2,6 +2,8 @@ package com.hniu.mapper;
 
 import com.hniu.entity.Comment;
 import com.hniu.entity.CommentExample;
+import com.hniu.entity.Comment_Extends;
+import com.hniu.entity.Curriclum_Extends;
 import com.hniu.util.State;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public interface CommentMapper {
 
     int updateByPrimaryKey(Comment record);
    
-    State<Object> getCommentInformation(@Param("id") Integer id);
+    Comment_Extends getCommentInformation(@Param("id") Integer id);
 
-	State<Object> getEvaluateNum(Integer id);
+	Curriclum_Extends getEvaluateNum(@Param("id") Integer id);
 }

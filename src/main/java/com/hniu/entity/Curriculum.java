@@ -29,6 +29,8 @@ public class Curriculum {
 
     private String mainTeacher;
 
+    
+    
     public Integer getCurriculumId() {
         return curriculumId;
     }

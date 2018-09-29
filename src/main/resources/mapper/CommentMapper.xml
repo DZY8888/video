@@ -229,11 +229,10 @@
   
     <!-- 列出课程名称，评价内容，评价时间，及评价标星 -->
   <select id="getCommentInformation" parameterType="java.lang.Integer" resultType="com.hniu.entity.Comment_Extends">
-     SELECT  a.content,a.ctime,a.asterisk_num,
-        b.`name`
+      SELECT  a.content,a.ctime,a.asterisk_num,b.`name`
 		FROM tbl_comment AS a
-		inner JOIN tbl_curriculum AS b ON a.curriculum_id=b.curriculum_id WHERE comment_id=#{id}
-	    order by a.comment_id
+		left JOIN tbl_curriculum AS b ON a.curriculum_id=b.curriculum_id WHERE a.comment_id=#{id}
+	  order by a.comment_id
   </select>
   
   <!--2.显示课程总的评价数和课程得分-->
